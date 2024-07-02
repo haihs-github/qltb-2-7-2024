@@ -1,0 +1,222 @@
+{% extends "pages/base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<div class="header--home">
+  <div class="header__logo-section">
+    <a href="/home" style="color: #333;" class="header__logo--home">
+      <i class="fa-solid fa-house-laptop header__logo"></i>
+    </a>
+    <span class="header__name--home">Teaching Equipment Management</span>
+  </div>
+  <div class="user">
+    <div class="user__role">
+      {% if role %}
+      <i class="fa-solid fa-users-gear"></i>
+      <span>quản trị viên</span>
+      {% else %}
+      <i class="fa-solid fa-users"></i> 
+      <span>người dùng cơ bản</span> 
+     {% endif %}
+    </div>
+    <div class="user__noti">
+      <i class="fa-solid fa-bell"></i>  
+      <ul class="user__noti__history">
+        {% for tb in thongbao %}
+        <li>
+          <p class="noti__history__device">
+            Trả thiết bị/phòng: 
+            <span>
+              {{tb.deviceId.name}}
+            </span>
+          </p>
+          <p class="noti__history__info">
+            người dùng<span> {{tb.userId.name}}</span> đã trả thiết bị
+          </p>
+        </li>
+        {% endfor %}
+        <li>
+          <a href="/thietbidangduocmuon" class="user__noti__link">
+            xem chi tiết
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="user__avatar">
+      <img src="{% static 'user-avatar-img.png' %}" alt="avatar">
+      <i class="fa-solid fa-angle-down"></i>
+      <ul class="user__avatar__option">
+        <li>
+          <form method="post" action="{% url 'home:login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="out" id="out" value="out">
+            <button type="submit">Đăng xuất</button> 
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="contain">
+  <ul class="sidebar">
+    <li class="user">
+      <div class="user__avatar">
+        <img src="{% static 'user-avatar-img.png' %}" alt="avatar">
+      </div>
+      <div class="user__info">
+        <span>{{name}}</span>
+        <div class="user__role--sidebar">
+          {% if role %}
+          <i class="fa-solid fa-users-gear"></i>
+          <span>quản trị viên</span>
+          {% else %}
+          <i class="fa-solid fa-users"></i> 
+          <span>người dùng cơ bản</span> 
+         {% endif %}
+        </div>
+      </div>
+    </li>
+    {% if role %}
+    <li class="sidebar__item">
+      <a  href="/home" class="sidebar__link sidebar__link--selected">
+        <i class="fa-solid fa-business-time"></i>
+        <span class="">Mượn/Trả thiết bị</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/lab" class="sidebar__link">
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <span class="">Phòng bộ môn</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/admins" class="sidebar__link">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span class="">Quản lí chung (QTV)</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/thongke" class="sidebar__link">
+        <i class="fa-solid fa-table-list"></i>
+        <span class="">Thống kê & báo cáo</span>
+      </a>
+    </li>
+  </ul>
+
+    {% else %}
+    <li class="sidebar__item">
+      <a href="/home" class="sidebar__link sidebar__link--selected">
+        <i class="fa-solid fa-business-time"></i>
+        <span class="">Mượn/Trả thiết bị</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/lab" class="sidebar__link">
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <span class="">Phòng bộ môn</span>
+      </a>
+    </li>
+  </ul>
+
+   {% endif %}
+
+   
+
+  <div class="content--home">
+    <div class="content__header">
+      <p class="content__header__note">
+        Các thiết bị có thể mượn 
+      </p>
+    <div class="search">
+      <form class="search_section" method="post" action="{% url 'home:home' %}">
+        {% csrf_token %}
+        <input class="search_input" type="search" name="search" value="" placeholder="Tìm kiếm thiết bị theo tên">
+        <button class="search_icon" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+            <div class="switch__page--green">
+          <a href="/thietbidangduocmuon" class="">
+            Xem trang trả
+          </a>
+        </div>
+  </div>
+
+    <form class="contetn__soft__option--home" method="post" action="{% url 'home:home' %}">
+      {% csrf_token %}
+      <span>hiển thị theo môn:</span>
+      <select name="mon" id="mon">
+        <option value="">Chọn môn</option>
+        <option value="">Tất cả các môn</option>
+        <option value="quocphonganninh">Quốc Phòng An Ninh</option>
+        <option value="toanhoc">Toán</option>
+        <option value="lichsu">Lịch sử</option>
+        <option value="nguvan">Ngữ Văn</option>
+        <option value="diali">Địa Lí</option>
+        <option value="vatli">Vật Lí</option>
+        <option value="sinhhoc">Sinh Học</option>
+        <option value="hoahoc">Hóa Học</option>
+        <option value="theduc">Thể Dục</option>
+        <option value="tinhoc">Tin Học</option>
+      </select>
+        <button type="submit soft__btn">Lọc</button> 
+    </form>
+    <div class="refresh">
+      <a href="/home" class="">  
+        <i class="fa-solid fa-rotate-right"></i>
+        <span>Làm mới</span>
+      </a>
+    </div>
+
+  <div class="content__device">
+    <table class="device__table">
+      <thead>
+        <tr>
+          <th>Tên thiết bị</th>
+          <th>Bộ môn</th>
+          <th>Đơn vị</th>
+          <th>Đăng ký mượn thiết bị</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for device in device0 %}
+        <tr class="valid" style="background-color: #f14848;">
+          <td class="table__name">{{device.name}}</td>
+          <td>{{device.mon}}</td>
+          <td>{{device.unit}}</td>
+          <td>
+            <form method="post" action="{% url 'home:home' %}">
+              {% csrf_token %}
+              <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                <button type="submit ">Đăng ký (Hết)</button> 
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+        {% for device in device %}
+        <tr class="valid">
+          <td class="table__name">{{device.name}}</td>
+          <td>{{device.mon}}</td>
+          <td>{{device.unit}}</td>
+          <td>
+            <form method="post" action="{% url 'home:home' %}">
+              {% csrf_token %}
+              <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                <button type="submit">Đăng ký</button> 
+            </form>
+          </td>
+        </tr>
+        <form method="post" action="{% url 'home:home' %}">
+          {% csrf_token %}
+          <input type="hidden" id="myInput" name ="myInput" >
+          <input type="hidden" name="dd" id="dd" value="{{device.id}}">
+          <input type="submit" id="sub" style="display: none;"> 
+        </form>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "pages/base.html" %}
+{% block title %} Login {% endblock %}
+{% block content %}
+{% load static %}
+  <!-- signIn -->
+  <div class="header">
+    <div class="header__logo-section">
+      <i class="fa-solid fa-house-laptop header__logo"></i>
+      <span class="header__name">Teaching Equipment Management</span>
+      <div class="header__signIn">Đăng nhập</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content-max-width">
+      <div class="slogan">
+        <img src="{% static 'logo_nvh.png' %}" alt="logo_nvh" style="width: 100%; ">
+        <span class="slogan__name">Teaching Equipment Management</span>
+        <p class="slogan__text">
+          <span>Website quản lí Thiết bị dạy học</span> 
+          <span>trong nhà trường</span>
+        </p>
+      </div>
+      <form action="{% url 'home:login' %}" method="post"  class="signIn">
+        {% csrf_token %}
+        <span class="signIn-header">Đăng nhập</span>
+        <input type="text" name="userName" id="userName" class="signIn-name input-form" placeholder="Tên đăng nhập" required title="Vui lòng nhập tên đăng nhập">
+        <input type="password" name="password" id="password" class="signIn-pass input-form" placeholder="Mật khẩu" required title="Vui lòng nhập mật khẩu">
+        <button type="submit" class="signIn-button btn">Đăng nhập</button>
+        <div class="sprit-line">
+          <div></div>
+          <p>HOẶC CHƯA CÓ TÀI KHOẢN?</p>
+          <div></div>
+        </div>
+        <a href="/register" class="signUp btn">
+          Đăng ký ngay
+        </a>
+      </form>
+    </div>		
+  </div>
+  <div class="bqw">
+    <span class="bq">Copyright © 2024 THPT Nguyễn Văn Huyên</span>
+    <input type="hidden" name="bq" id="bq" value="bq"/>
+    <span class="bq">ĐC: Tổ 9, phường An Tường, TP. Tuyên Quang, tỉnh Tuyên Quang</span>
+    <!-- <span class="bq" ><span>Design by <a href="https://github.com/LuongLuyen" class="linkgit" title="visit git"><i class="fa-brands fa-github"></i> Luyen</a> & <a href="https://github.com/Haidzls" class="linkgit" title="visit git"><i class="fa-brands fa-github"></i> Hai</a></span></span> -->
+</div>
+{% endblock %}

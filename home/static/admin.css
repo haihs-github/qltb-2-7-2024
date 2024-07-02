@@ -1,0 +1,161 @@
+/* add button */
+.add-btn{
+	background-color: #3ad43a;
+	border-radius: 30px;
+	color: #333;
+	text-decoration: none;
+	height: fit-content;
+}
+
+.add-btn:hover{
+	opacity: 0.9;
+}
+
+/* .add-btn:hover span{
+	display: inline-block;
+}
+
+.add-btn span{
+	display: none;
+} */
+
+/* device__table */
+
+.content__device--admin{
+	margin-top: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+
+.device__table--admin{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+
+.device__table--admin thead tr th{
+	text-align: left;
+	border: 1px solid #333;
+	border-bottom: 0px;
+	background-color: #d5e9fe;
+}
+
+.device__table--admin th, td{
+	padding: 8px;
+	border: 1px solid #333;
+	overflow-x: hidden;
+}
+
+.table__name{
+	font-size: 14px;
+	text-transform: uppercase;
+}
+
+.device__table-admin button{
+	padding: 8px;
+	background-color: #cff5b7;
+	border: none;
+	color: #1d8b36;
+}
+
+.device__table--admin button:hover{
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.btn--edit{
+	padding: 8px;
+	background-color: #ffcf0b;
+	border: none;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 5px;
+}
+
+.btn--edit:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.btn--edit--red{
+	padding: 8px;
+	background-color: red;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+	border-radius: 5px;
+	width: 100%;
+	margin: 0px;
+	text-align: center;
+}
+
+.btn--edit--red--delete{
+	padding: 8px;
+	background-color: red;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+	border-radius: 5px;
+	width: 100%;
+	margin: 0px 0px 0px 5px;
+	text-align: center;
+}
+
+.btn--edit--red:hover {
+	cursor: pointer;
+	background-color: #3ad43a;
+	color: #fff;
+}
+
+.btn--edit--green {
+	margin-left: 5px;
+	padding: 8px;
+	background-color: #3ad43a;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+	border-radius: 5px;
+	width: 100%;
+	text-align: center;
+}
+
+.fix-button{
+	/* background-color: #fdd648ea; */
+	color: #fff;
+}
+
+.fix-button .span1{
+	text-wrap: nowrap;
+}
+
+.fix-button:hover .span1{
+	/* display: none; */
+}
+
+.fix-button .span2{
+	display: none;
+	width: 75px;
+	}
+
+.fix-button:hover .span2{
+	display: block;
+}
+
+.fix-button .span3{
+	display: none;
+}
+
+.fix-button:hover .span3{
+	display: block;
+}
+
+.btn--delete{
+	padding: 8px;
+	background-color: #ff3232;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+}

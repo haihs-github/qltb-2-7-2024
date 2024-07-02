@@ -1,0 +1,54 @@
+.content__soft {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+.contetn__soft__option {
+	display: flex;
+	justify-content: space-between;
+}
+
+.contetn__soft__option span {
+	width: 170px;
+}
+
+.contetn__soft__option select {
+	width: 200px;
+	padding: 4px;
+}
+
+.contetn__soft__option button {
+	width: 50px;
+	padding: 4px;
+}
+
+.contetn__soft__option button:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.contetn__soft__option--date span {
+	width: 100px;
+}
+
+.export-btn {
+	text-wrap: nowrap;
+}
+
+.filter {
+	padding-right: 5px;
+}
+
+.filter input {
+	height: 25px !important;
+}
+
+.filter__button {
+	display: flex;
+}
+
+.filter__now {
+	display: flex;
+	justify-content: flex-start;
+}

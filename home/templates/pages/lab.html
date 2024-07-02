@@ -1,0 +1,261 @@
+{% extends "pages/base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% load static %}
+<div class="header--home">
+  <div class="header__logo-section">
+    <a href="/home" style="color: #333;" class="header__logo--home">
+      <i class="fa-solid fa-house-laptop header__logo"></i>
+    </a>
+    <span class="header__name--home">Teaching Equipment Management</span>
+  </div>
+  <div class="user">
+    <div class="user__role">
+      {% if role %}
+      <i class="fa-solid fa-users-gear"></i>
+      <span>quản trị viên</span>
+      {% else %}
+      <i class="fa-solid fa-users"></i> 
+      <span>người dùng cơ bản</span> 
+     {% endif %}
+    </div>
+    <div class="user__noti">
+      <i class="fa-solid fa-bell"></i>  
+      <ul class="user__noti__history">
+        {% for tb in thongbao %}
+        <li>
+          <p class="noti__history__device">
+            Trả thiết bị/phòng: 
+            <span>
+              {{tb.deviceId.name}}
+            </span>
+          </p>
+          <p class="noti__history__info">
+            người dùng<span> {{tb.userId.name}}</span> đã trả thiết bị
+          </p>
+        </li>
+        {% endfor %}
+        <li>
+          <a href="/thietbidangduocmuon" class="user__noti__link">
+            xem chi tiết
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="user__avatar">
+      <img src="{% static 'user-avatar-img.png' %}" alt="avatar">
+      <i class="fa-solid fa-angle-down"></i>
+      <ul class="user__avatar__option">
+        <li>
+          <form method="post" action="{% url 'home:login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="out" id="out">
+            <button type="submit">Đăng xuất</button> 
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="contain">
+  <ul class="sidebar">
+    <li class="user">
+      <div class="user__avatar">
+        <img src="{% static 'user-avatar-img.png' %}" alt="avatar">
+      </div>
+      <div class="user__info">
+        <span>{{name}}</span>
+        <div class="user__role--sidebar">
+          {% if role %}
+          <i class="fa-solid fa-users-gear"></i>
+          <span>quản trị viên</span>
+          {% else %}
+          <i class="fa-solid fa-users"></i> 
+          <span>người dùng cơ bản</span> 
+         {% endif %}
+        </div>
+        
+      </div>
+    </li>
+
+    {% if role %}
+    <li class="sidebar__item">
+      <a href="/home" class="sidebar__link">
+        <i class="fa-solid fa-business-time"></i>
+        <span class="">Mượn/Trả thiết bị</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/lab" class="sidebar__link sidebar__link--selected">
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <span class="">Phòng bộ môn</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/admins" class="sidebar__link">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span class="">Quản lí chung (QTV)</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/thongke" class="sidebar__link">
+        <i class="fa-solid fa-table-list"></i>
+        <span class="">Thống kê & báo cáo</span>
+      </a>
+    </li>
+  </ul>
+
+    {% else %}
+    <li class="sidebar__item">
+      <a href="/home" class="sidebar__link ">
+        <i class="fa-solid fa-business-time"></i>
+        <span class="">Mượn/Trả thiết bị</span>
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/lab" class="sidebar__link sidebar__link--selected">
+        <i class="fa-solid fa-house-chimney-user "></i>
+        <span class="">Phòng bộ môn</span>
+      </a>
+    </li>
+  </ul>
+
+   {% endif %}
+  <div class="content--home">
+    <div class="content__header">
+        <p class="content__header__note">
+            Mượn phòng học bộ môn
+        </p>
+        <div class="content-color-box">
+            <div class="content-color-box--green"></div>
+            <p>Phòng còn trống</p>
+        </div>
+        <div class="content-color-box">
+            <div class="content-color-box--red"></div>
+            <p>Hiện tại đang có lớp</p>
+        </div>
+        <div class="refresh refresh--lab">
+          <a href="/lab" class="">  
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Làm mới</span>
+          </a>
+        </div>
+    </div>
+
+    <div class="content__device--room">
+        <div class="grade">
+            <div class="grade__head">Các phòng đang được sử dụng</div>
+            <div class="grade__content">
+                <div class="grade__room">
+                    {% for device in device0 %}
+                    
+                    <div class="grade__room__item grade__room__item--runout">
+                        <div class="room__item-name">{{device.deviceId.name}}</div>
+                        <div class="room__item-info">
+                            <div class="hidden-box1">
+                                <div class="select-box">
+                                    <span>Tiết: {{device.tiet}}</span>
+                                </div>
+                                <div class="select-box">
+                                    <span>Lớp: {{device.lop}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden-box1 select-box">GV: {{device.userId.userName}}</div> 
+                        <button type="submit" class="hidden-box2">Đăng ký</button> 
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="grade">
+            <div class="grade__head">Tầng 1</div>
+            <div class="grade__content">
+                {% for device in device1 %}
+                <div class="grade__room">
+                    <div  class="grade__room__item grade__room__item--instock">
+                        <div class="room__item-name">{{device.name}}</div>
+                        <form method="post" action="{% url 'home:lab' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                        <button type="submit" class="hidden-box2">Đăng ký</button> 
+                        </form>
+                      </div>  
+                    </div>
+                    {% endfor %} 
+                </div>
+        </div>
+        <div class="grade">
+            <div class="grade__head">Tầng 2</div>
+            <div class="grade__content">
+              {% for device in device2 %}
+              <div class="grade__room">
+                  <div  class="grade__room__item grade__room__item--instock">
+                      <div class="room__item-name">{{device.name}}</div>
+                      <form method="post" action="{% url 'home:lab' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                      <button type="submit" class="hidden-box2">Đăng ký</button> 
+                      </form>
+                    </div>  
+                  </div>
+                  {% endfor %} 
+                </div>
+        </div>
+        <div class="grade">
+            <div class="grade__head">Tầng 3</div>
+            <div class="grade__content">
+              {% for device in device3 %}
+              <div class="grade__room">
+                  <div  class="grade__room__item grade__room__item--instock">
+                      <div class="room__item-name">{{device.name}}</div>
+                      <form method="post" action="{% url 'home:lab' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                      <button type="submit" class="hidden-box2">Đăng ký</button> 
+                      </form>
+                    </div>  
+                  </div>
+                  {% endfor %} 
+                </div>
+        </div>
+        <div class="grade">
+            <div class="grade__head">Tầng 4</div>
+            <div class="grade__content">
+              {% for device in device4 %}
+              <div class="grade__room">
+                  <div  class="grade__room__item grade__room__item--instock">
+                      <div class="room__item-name">{{device.name}}</div>
+                      <form method="post" action="{% url 'home:lab' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                      <button type="submit" class="hidden-box2">Đăng ký</button> 
+                      </form>
+                    </div>  
+                  </div>
+                  {% endfor %} 
+                </div>
+        </div>
+        <div class="grade">
+            <div class="grade__head">Khu trong</div>
+            <div class="grade__content">
+              {% for device in deviceKt %}
+              <div class="grade__room">
+                  <div  class="grade__room__item grade__room__item--instock">
+                      <div class="room__item-name">{{device.name}}</div>
+                      <form method="post" action="{% url 'home:lab' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="deviceId" id="deviceId" value="{{device.id}}">
+                      <button type="submit" class="hidden-box2">Đăng ký</button> 
+                      </form>
+                    </div>  
+                  </div>
+                  {% endfor %} 
+                </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
