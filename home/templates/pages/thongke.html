@@ -226,31 +226,48 @@
       <table class="device__table--admin">
         <thead>
           <tr>
-            <th>Tên thiết bị</th>
-            <th>Trạng thái</th>
+            <th>STT</th>
+            <th>Ngày mượn</th>
+            <th>Tên thiết bị/hóa chất</th>
+            <th>Tên bài/tiết dạy</th>
             <th>Số lượng (mượn)</th>
-            <th>Đơn vị</th>
+            <!-- <th>Đơn vị</th> -->
+            <th>Tiết TKB</th>
+            <th>Tiết PPCT</th>
+            <th>Lớp dạy</th>
             <th>Người mượn</th>
             <th> Tên tài khoản (-T là đã trả)</th>
-            <th>Ngày mượn</th>
-            <th>Tiết mượn</th>
+            <th>Trạng thái</th>
           </tr>
         </thead>
 
-        <tbody>
-          {% for device in device %}
-          <tr>
-            <td class="table__name">{{device.deviceId.name}}</td>
-            <td>{{device.deviceId.status}}</td>
-            <td>1</td>
-            <td>{{device.deviceId.unit}}</td>
-            <td>{{device.userId.name}} mượn cho: {{device.lop}}</td>
-            <td>{{device.giaovien}}</td>
-            <td>{{device.muon}}</td>
-            <td>{{device.tiet}}</td>
-          </tr>
-          {% endfor %}
-          </tr>
+        <!-- test stt -->
+        <!-- <script>
+          var stt = 1
+        </script>
+        <tbody> -->
+        {% for device in device %}
+        <!-- <script>
+            stt = stt + 1;
+            var node = document.getElementsByClassName('stt')
+            node.innerHTML('stt')
+          </script> -->
+        <tr>
+          <td class="stt"></td>
+          <td>{{device.muon}}</td>
+          <td class="table__name">{{device.deviceId.name}}</td>
+          <td>{{device.tenbai}}</td>
+          <td>1</td>
+          <!-- <td>{{device.deviceId.unit}}</td> -->
+          <td>{{device.tiet}}</td>
+          <td>{{device.tietPPCT}}</td>
+          <td>{{device.lop}}</td>
+          <td>{{device.userId.name}}</td>
+          <td>{{device.giaovien}}</td>
+          <td>{{device.deviceId.status}}</td>
+        </tr>
+        {% endfor %}
+        </tr>
         </tbody>
       </table>
       <br />

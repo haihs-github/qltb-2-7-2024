@@ -351,7 +351,7 @@ def getHome(request):
         listT = thongBao(request)
         return render(request, 'pages/Home.html',{"device":listDevice,"role":rl,"name":name,"device0":listDevice0,"thongbao":listT,"id":id})
     else:
-        return redirect('/') # chưa đăng nhạp cho về trang đăng nhập
+        return redirect('/') # chưa đăng nhập cho về trang đăng nhập
 
 def locCuaLoc(timKiem):
     sum =0
@@ -599,10 +599,12 @@ def getBorrowLab(request):
             ngayt = request.POST.get('ngayt')
             tietm = request.POST.get('tietm')
             deviceId = request.POST.get('deviceId')
+            tenbai = request.POST.get('tenbai')
+            tietPPCT = request.POST.get('tietPPCT')
             id = request.session.get('id') #eeeeeeeeee
             if checkSLM(deviceId,tietm,ngaym): # kiểm tra xem quá số lượng cho mượn chưa, chưa hết tiết bị thì vẫn mượn được
                 if giaovien != "" and lop != "" and ngaym != "" and ngayt !="" and tietm != "" and deviceId != "" :
-                    borrowReturn = BorrowReturn(userId_id=int(id),deviceId_id=int(deviceId),muon=ngaym,tra=ngayt,lop=lop, giaovien =giaovien,tiet=tietm)
+                    borrowReturn = BorrowReturn(userId_id=int(id),deviceId_id=int(deviceId),muon=ngaym,tra=ngayt,lop=lop, giaovien =giaovien,tiet=tietm, tenbai=tenbai, tietPPCT=tietPPCT)
                     borrowReturn.save()
                     return redirect('/thietbidangduocmuon')
             device = Device.objects.get(id = deviceId)
@@ -626,14 +628,17 @@ def getBorrowDevice(request):
             tietm = request.POST.get('tietm')
             deviceId = request.POST.get('deviceId')
             update = request.POST.get('update')
+            #test borrow tenbai & tietPPCT
+            tenbai = request.POST.get('tenbai')
+            tietPPCT = request.POST.get('tietPPCT')
             id = request.session.get('id') #eeeeeeeeee
             print(str(ngaym), str(tietm))
 
             if update == None: # them moi
                 if checkSLM(deviceId,tietm,ngaym):
-                    if giaovien != "" and lop != "" and ngaym != "" and ngayt !="" and tietm != "" and deviceId != "":
+                    if giaovien != "" and lop != "" and ngaym != "" and ngayt !="" and tietm != "" and deviceId != "" and tenbai !="" and tietPPCT !="":
                         # print(ngaym, tietm)
-                        borrowReturn = BorrowReturn(userId_id=int(id),deviceId_id=int(deviceId),muon=ngaym,tra=ngayt,lop=lop, giaovien =giaovien,tiet=tietm)
+                        borrowReturn = BorrowReturn(userId_id=int(id),deviceId_id=int(deviceId),muon=ngaym,tra=ngayt,lop=lop, giaovien=giaovien,tiet=tietm, tenbai=tenbai, tietPPCT=tietPPCT)
                         borrowReturn.save()
                         return redirect('/thietbidangduocmuon')
             else: # nếu trường hợp cập nhật lại lịch sử lên lịch mượn
