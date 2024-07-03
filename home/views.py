@@ -396,18 +396,35 @@ def locCuaLoc(timKiem):
         for i in data:
            sum= sum+1
         return [data,sum]
+# test stt
+def getstt():
+    borrowReturn = BorrowReturn.objects.all()
+    cnt = 1
+    for x in borrowReturn:
+        x.stt = cnt
+        x.save()
+        cnt = cnt + 1
+    return 0
+#test stt
 
 def getThongKe(request):
-    
     id = request.session.get('id') 
-
     if checkLogin(request): 
         checkHSD()
         checkGioMuon()
         nameUser = request.session.get('name') 
         rl = getLogin(request)
         l = BorrowReturn.objects.select_related('deviceId','userId').all()
+        # test stt
+        getstt()
+        # borrowReturn = BorrowReturn.objects.all()
+        # cnt = 1
+        # for x in borrowReturn:
+        #     borrowReturn.stt = cnt
+        #     cnt = cnt + 1
+        # test stt
         device =[]
+        cnt = 1
         for x in l:
             if x.deviceId.status != "Hết hạn":
                 device.append(x)

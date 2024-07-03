@@ -317,6 +317,7 @@ CREATE TABLE `home_borrowreturn` (
   `tenbai` varchar(255) NOT NULL,
   `tietPPCT` varchar(255) NOT NULL,
   `ngaytra` varchar(255) NOT NULL,
+  `stt` bigint NOT NULL,
   
   PRIMARY KEY (`id`),
   KEY `home_borrowreturn_deviceId_id_663ca481_fk_home_device_id` (`deviceId_id`),

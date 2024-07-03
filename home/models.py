@@ -31,3 +31,4 @@ class BorrowReturn(models.Model):
   tenbai = models.CharField(max_length=255)
   tietPPCT = models.CharField(max_length=255)
   ngaytra = models.CharField(max_length=255)
+  stt = models.BigIntegerField()

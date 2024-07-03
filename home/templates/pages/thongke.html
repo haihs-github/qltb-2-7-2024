@@ -241,35 +241,25 @@
             <th>Tình trạng trả</th>
           </tr>
         </thead>
-
-        <!-- test stt -->
-        <!-- <script>
-          var stt = 1
-        </script>
-        <tbody> -->
-        {% for device in device %}
-        <!-- <script>
-            stt = stt + 1;
-            var node = document.getElementsByClassName('stt')
-            node.innerHTML('stt')
-          </script> -->
-        <tr>
-          <td class="stt"></td>
-          <td>{{device.muon}}</td>
-          <td class="table__name">{{device.deviceId.name}}</td>
-          <td>{{device.tenbai}}</td>
-          <td>1</td>
-          <!-- <td>{{device.deviceId.unit}}</td> -->
-          <td>{{device.tiet}}</td>
-          <td>{{device.tietPPCT}}</td>
-          <td>{{device.lop}}</td>
-          <td>{{device.userId.name}}</td>
-          <td>{{device.giaovien}}</td>
-          <td>{{device.ngaytra}}</td>
-          <td>{{device.deviceId.status}}</td>
-        </tr>
-        {% endfor %}
-        </tr>
+        <tbody>
+          {% for device in device %}
+          <tr>
+            <td class="stt">{{device.stt}}</td>
+            <td>{{device.muon}}</td>
+            <td class="table__name">{{device.deviceId.name}}</td>
+            <td>{{device.tenbai}}</td>
+            <td>1</td>
+            <!-- <td>{{device.deviceId.unit}}</td> -->
+            <td>{{device.tiet}}</td>
+            <td>{{device.tietPPCT}}</td>
+            <td>{{device.lop}}</td>
+            <td>{{device.userId.name}}</td>
+            <td>{{device.giaovien}}</td>
+            <td>{{device.ngaytra}}</td>
+            <td>{{device.deviceId.status}}</td>
+          </tr>
+          {% endfor %}
+          </tr>
         </tbody>
       </table>
       <br />
