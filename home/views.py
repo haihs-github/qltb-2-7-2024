@@ -364,41 +364,49 @@ def locCuaLoc(timKiem):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter(deviceId__mon=timKiem['mon'])
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     elif(timKiem['mon']=="" and timKiem['giaovien']!="" and timKiem['tu']=="" and timKiem['den']==""):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter(userId__name= timKiem['giaovien'])
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     elif(timKiem['mon']=="" and timKiem['giaovien']=="" and timKiem['tu']!="" and timKiem['den']!=""):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter(muon__gte=f"{timKiem['tu']}", muon__lte=f"{timKiem['den']}")
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     elif(timKiem['mon']!="" and timKiem['giaovien']!="" and timKiem['tu']=="" and timKiem['den']==""):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter(deviceId__mon=timKiem['mon'], userId__name= timKiem['giaovien'])
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     elif(timKiem['mon']!="" and timKiem['giaovien']=="" and timKiem['tu']!="" and timKiem['den']!=""):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter(deviceId__mon=timKiem['mon'],muon__gte=f"{timKiem['tu']}", muon__lte=f"{timKiem['den']}")
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     elif(timKiem['mon']=="" and timKiem['giaovien']!="" and timKiem['tu']!="" and timKiem['den']!=""):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter( userId__name= timKiem['giaovien'],muon__gte=f"{timKiem['tu']}", muon__lte=f"{timKiem['den']}")
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     elif(timKiem['giaovien'] !="" and timKiem['mon']!="" and timKiem['tu'] !="" and timKiem['den']!="" ):
        data = BorrowReturn.objects.select_related('deviceId','userId').filter(deviceId__mon=timKiem['mon'], userId__name= timKiem['giaovien'],muon__gte=f"{timKiem['tu']}", muon__lte=f"{timKiem['den']}")
        for i in data:
            sum= sum+1
+           i.stt = sum # test stt
        return [data,sum]
     else:
         data = BorrowReturn.objects.select_related('deviceId','userId').all()
         for i in data:
            sum= sum+1
+           i.stt = sum # test stt
         return [data,sum]
 # test stt
 def getstt():
@@ -428,7 +436,6 @@ def getThongKe(request):
         #     cnt = cnt + 1
         # test stt
         device =[]
-        cnt = 1
         for x in l:
             if x.deviceId.status != "Hết hạn":
                 device.append(x)
