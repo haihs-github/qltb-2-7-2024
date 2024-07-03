@@ -92,20 +92,32 @@ def excelNd(list): # xuat nguoi dung
 def xuatDanhSachTheoLoc(list):
     workbook = Workbook()
     worksheet = workbook.active
-    headers = ["Tên thiết bị","Trạng thái", "Số lượng(mượn)","Đơn vị","người mượn","Tên tài khoản","Ngày mượn","Tiết mượn"] 
+    headers = ["STT","Ngày mượn","Tên thiết bị hoặc hóa chất được sử dụng", "Tên bài/Tiết dạy", "Số lượng","Tiết TKB","TIết PPCT","Lớp dạy","Chữ ký GV mượn","Ngày trả","Tình trạng trả","Chữ ký GV trả"] 
     for col_num, header in enumerate(headers, start=1):
         worksheet.cell(row=1, column=col_num, value=header)
     for row_num, device in enumerate(list, start=2):
-        worksheet.cell(row=row_num, column=1, value=device.deviceId.name)
-        worksheet.cell(row=row_num, column=2, value=device.deviceId.status)
-        worksheet.cell(row=row_num, column=3, value=1)
-        worksheet.cell(row=row_num, column=4, value=device.deviceId.unit)
-        worksheet.cell(row=row_num, column=5, value=device.userId.name)
-        worksheet.cell(row=row_num, column=6, value=device.giaovien)
-        worksheet.cell(row=row_num, column=7, value=device.muon)
-        worksheet.cell(row=row_num, column=8, value=device.tiet)
+        worksheet.cell(row=row_num, column=1, value=device.stt)
+        worksheet.cell(row=row_num, column=2, value=device.muon)
+        worksheet.cell(row=row_num, column=3, value=device.deviceId.name)
+        worksheet.cell(row=row_num, column=4, value=device.tenbai)
+        worksheet.cell(row=row_num, column=5, value=1)
+        worksheet.cell(row=row_num, column=6, value=device.tiet)
+        worksheet.cell(row=row_num, column=7, value=device.tietPPCT)
+        worksheet.cell(row=row_num, column=8, value=device.lop)
+        worksheet.cell(row=row_num, column=9, value=" ")
+        worksheet.cell(row=row_num, column=10, value=device.ngaytra)
+        worksheet.cell(row=row_num, column=11, value=device.deviceId.status)
+        worksheet.cell(row=row_num, column=9, value=" ")
+        # worksheet.cell(row=row_num, column=7, value=device.deviceId.unit)
+        # worksheet.cell(row=row_num, column=8, value=device.deviceId.price)
+        # worksheet.cell(row=row_num, column=10, value=device.deviceId.date)
+        # worksheet.cell(row=row_num, column=11, value=device.deviceId.location)
+        # worksheet.cell(row=row_num, column=12, value=device.userId.name)
+        # worksheet.cell(row=row_num, column=13, value=device.userId.role)
+        # worksheet.cell(row=row_num, column=14, value=device.deviceId.hansudung)
+
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=loc_data.xlsx'
+    response['Content-Disposition'] = 'attachment; filename=device_data.xlsx'
     workbook.save(response)
     return response
 
