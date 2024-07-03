@@ -123,6 +123,7 @@ def checkHSD(): # kiểm tra hạn sử dụng
             device.append(x)
     for x in device:
         dateNow =str(timeVietnam("dmy"))
+        # dateNow = "2024-07-03" # test thời gian timetest
         hsd= x.hansudung
         if(hsd < dateNow or hsd == dateNow):
             x.status = 'Hết hạn'
@@ -136,7 +137,7 @@ def checkGioMuon():
             non=0
         else:
             dateNow =str(timeVietnam("dmy")) #lấy giờ thực tế
-            # dateNow = "2023-12-02" # test thời gian timetest
+            # dateNow = "2024-07-03" # test thời gian timetest
             if dateNow in x.muon:
                 listls.append(x) # thêm vào
     for x in listls:
@@ -146,8 +147,8 @@ def checkGioMuon():
         result_time_string = result_time.strftime("%H:%M:%S")
         T= str(x.muon) + " "+ result_time_string #2023-11-30 08:00:00  2023-11-30 07:15:00
         dateNow =str(timeVietnam("no"))
-        # dateNow = "2023-12-02 09:20:00" # test thời gian timetest
-        if T== dateNow or dateNow>T or dateNow< x.tiet:
+        # dateNow = "2024-07-03 11:20:00" # test thời gian timetest
+        if T == dateNow or dateNow>T or dateNow< x.tiet:
             device = Device.objects.get(id=x.deviceId_id)
             mt= BorrowReturn.objects.get(id=x.id)
             mt.giaovien = mt.giaovien + "-"
@@ -158,7 +159,7 @@ def checkGioMuon():
 
 def checkSLM(deviceId,tietm,ngaym): #lấy lúc mình bấm mượn
     dateNow =str(timeVietnam("no"))
-    # dateNow = "2023-12-02 09:20:00" #test thời gian timetest
+    # dateNow = "2024-07-03 11:20:00" # test thời gian timetest
     input_time_string = tietm
     input_time = datetime.strptime(input_time_string, "%H:%M:%S")
     result_time = input_time - timedelta(minutes=45)
@@ -320,7 +321,7 @@ def getHome(request):
                         list.append(x)
                     listT =thongBao(request)
                 return render(request, 'pages/Home.html',{"device": list,"thongbao":listT,"id":id,"name":name,"role":rl,"id":id})
-            if deviceId!=None: # nút đăng ký mượn trả thiết bị đó về  trang thôing tin mươn
+            if deviceId!=None: # nút đăng ký mượn trả thiết bị đó về  trang thông tin mượn
                 device = Device.objects.get(id = deviceId)
                 listT = thongBao(request)
                 return render(request, 'pages/Borrowdevice.html',{"device": device,"thongbao":listT,"name":name,"role":rl,"userName":userName})
@@ -702,6 +703,9 @@ def getThietBiDangDuocMuon(request):
                 device.save()
                 borrowReturn = BorrowReturn.objects.get(id=idtra)
                 borrowReturn.giaovien = str(borrowReturn.giaovien)+"T"
+                dateNow = str(timeVietnam("dmy"))
+                # dateNow = "2024-07-03" # test thời gian timetest
+                borrowReturn.ngaytra = dateNow #test ngaytra
                 borrowReturn.save()
                 return redirect('/thietbidangduocmuon')
             if idxoalich != None: # cập nhật lại lịch sử mượn
@@ -748,6 +752,7 @@ def getThietBiDangDuocMuon(request):
         return render(request, 'pages/Thietbidangduocmuon.html',{"device1": listTru1,"device2":listm1,"device3":listtruT1,"role":rl,"name":name,"thongbao":listT,"id":id})
     else:
         return redirect('/')
+
 def getBase(request): # lấy base maecj địch 
     name = request.session.get('name') #eeeeeeeeee
     rl = bool

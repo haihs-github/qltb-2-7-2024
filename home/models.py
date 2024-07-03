@@ -30,3 +30,4 @@ class BorrowReturn(models.Model):
   tiet = models.CharField(max_length=255)
   tenbai = models.CharField(max_length=255)
   tietPPCT = models.CharField(max_length=255)
+  ngaytra = models.CharField(max_length=255)

@@ -236,8 +236,9 @@
             <th>Tiết PPCT</th>
             <th>Lớp dạy</th>
             <th>Người mượn</th>
-            <th> Tên tài khoản (-T là đã trả)</th>
-            <th>Trạng thái</th>
+            <th>Tên tài khoản (-T là đã trả)</th>
+            <th>ngày trả</th>
+            <th>Tình trạng trả</th>
           </tr>
         </thead>
 
@@ -264,6 +265,7 @@
           <td>{{device.lop}}</td>
           <td>{{device.userId.name}}</td>
           <td>{{device.giaovien}}</td>
+          <td>{{device.ngaytra}}</td>
           <td>{{device.deviceId.status}}</td>
         </tr>
         {% endfor %}
