@@ -15,17 +15,17 @@
       <i class="fa-solid fa-users-gear"></i>
       <span>quản trị viên</span>
       {% else %}
-      <i class="fa-solid fa-users"></i> 
-      <span>người dùng cơ bản</span> 
-     {% endif %}
+      <i class="fa-solid fa-users"></i>
+      <span>người dùng cơ bản</span>
+      {% endif %}
     </div>
     <div class="user__noti">
-      <i class="fa-solid fa-bell"></i>  
+      <i class="fa-solid fa-bell"></i>
       <ul class="user__noti__history">
         {% for tb in thongbao %}
         <li>
           <p class="noti__history__device">
-            Trả thiết bị/phòng: 
+            Trả thiết bị/phòng:
             <span>
               {{tb.deviceId.name}}
             </span>
@@ -50,7 +50,7 @@
           <form method="post" action="{% url 'home:login' %}">
             {% csrf_token %}
             <input type="hidden" name="out" id="out">
-            <button type="submit">Đăng xuất</button> 
+            <button type="submit">Đăng xuất</button>
           </form>
         </li>
       </ul>
@@ -70,9 +70,9 @@
           <i class="fa-solid fa-users-gear"></i>
           <span>quản trị viên</span>
           {% else %}
-          <i class="fa-solid fa-users"></i> 
-          <span>người dùng cơ bản</span> 
-         {% endif %}
+          <i class="fa-solid fa-users"></i>
+          <span>người dùng cơ bản</span>
+          {% endif %}
         </div>
       </div>
     </li>
@@ -104,22 +104,22 @@
     </li>
   </ul>
 
-    {% else %}
-    <li class="sidebar__item">
-      <a href="/home" class="sidebar__link">
-        <i class="fa-solid fa-business-time"></i>
-        <span class="">Mượn/Trả thiết bị</span>
-      </a>
-    </li>
-    <li class="sidebar__item">
-      <a href="/lab" class="sidebar__link">
-        <i class="fa-solid fa-house-chimney-user"></i>
-        <span class="">Phòng bộ môn</span>
-      </a>
-    </li>
+  {% else %}
+  <li class="sidebar__item">
+    <a href="/home" class="sidebar__link">
+      <i class="fa-solid fa-business-time"></i>
+      <span class="">Mượn/Trả thiết bị</span>
+    </a>
+  </li>
+  <li class="sidebar__item">
+    <a href="/lab" class="sidebar__link">
+      <i class="fa-solid fa-house-chimney-user"></i>
+      <span class="">Phòng bộ môn</span>
+    </a>
+  </li>
   </ul>
 
-   {% endif %}
+  {% endif %}
 
   <div class="content--home">
     <div class="content__header">
@@ -130,13 +130,13 @@
         <a href="/add" class="btn add-btn">
           <i class="fa-solid fa-plus"></i>
           Nhập mới thiết bị
-      </a>
+        </a>
       </div>
       <div class="content-color-box refresh--none">
         <a href="/admins" class="btn add-btn">
           <i class="fa-solid fa-rotate-right"></i>
           <span>làm mới</span>
-      </a>
+        </a>
       </div>
     </div>
 
@@ -144,7 +144,8 @@
       <form class="search_section" method="post" action="{% url 'home:admins' %}">
         {% csrf_token %}
         <span style="min-width:fit-content; align-self: center; margin-right: 42px">Tìm kiếm thiết bị:</span>
-        <input class="search_input" type="search" name="search" value="" placeholder="Tìm kiếm thiết bị theo tên">
+        <input class="search_input" type="search" name="search" value="" placeholder="Tìm kiếm thiết bị theo tên"
+          required>
         <button class="search_icon sort__btn" type="submit">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -168,9 +169,9 @@
         <option value="tinhoc">Tin Học</option>
         <option value="hsd">Các thiết bị đã hết Hạn</option>
       </select>
-        <button type="submit" class="soft__btn">Lọc</button> 
+      <button type="submit" class="soft__btn">Lọc</button>
     </form>
-    
+
     <div class="content__device--admin">
       <table class="device__table--admin">
         <thead>
@@ -207,9 +208,9 @@
               <form method="post" action="{% url 'home:admins' %}">
                 {% csrf_token %}
                 <input type="hidden" name="capnhat" id="capnhat" value="{{device.id}}">
-                <button type="submit" class= "btn--edit">
+                <button type="submit" class="btn--edit">
                   <i class="fa-solid fa-wrench"></i>
-                </button> 
+                </button>
               </form>
             </td>
             <td>
